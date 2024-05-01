@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../header/Header";
 import Product from "../product/Product";
 import { useFetch } from "../../hooks/useHook";
+import { Link } from "react-router-dom";
 import axios from "../../api";
 import "./Home.css";
 
@@ -14,10 +15,10 @@ const Home = () => {
   //     .then((res) => setData(res.data.products))
   //     .catch((err) => console.log(err));
   // }, [btn]);
-
   const [btn, setBtn] = useState(1);
-  const [categoryName, setCategoryName] = useState("all");
   const [name, setName] = useState("");
+  const { data: username } = useFetch(`/products/search?q=${name}`, name);
+  const [categoryName, setCategoryName] = useState("all");
   const { data: categories } = useFetch("/products/categories");
   ///////////////////
   let url = `/products${
@@ -25,6 +26,17 @@ const Home = () => {
   }?limit=${btn * 4}`;
   //////////////////
   const { data } = useFetch(url, btn, categoryName);
+
+  const searchItems = username?.data?.products?.map((el) => (
+    <Link
+      key={el.id}
+      to={`/product/${el.id}`}
+      style={{ display: "flex", alignItems: "center", textDecoration: "none" }}
+    >
+      <img width={50} src={el.thumbnail} alt="" />
+      <h4>{el.title}</h4>
+    </Link>
+  ));
 
   let options = categories?.data?.map((el, inx) => (
     <option key={inx} value={el}>
@@ -45,18 +57,13 @@ const Home = () => {
         </select>
         <div className="input-search">
           <input
-            type="text"
+            type="search"
             placeholder="Search"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           {name?.trim() ? (
-            <ul>
-              <li>An apple mobile which</li>
-              <li>OPPO F19 is officially announced </li>
-              <li>Huawei’s re-badged P30 Pro</li>
-              <li>MacBook Pro 2021 with mini-LED</li>
-            </ul>
+            <div className="search-content">{searchItems}</div>
           ) : (
             <></>
           )}

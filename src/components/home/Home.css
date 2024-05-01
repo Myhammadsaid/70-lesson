@@ -11,23 +11,25 @@ form {
   justify-content: center;
   flex-wrap: wrap;
 }
-form input {
+.input-search {
+  position: relative;
   width: 300px;
+}
+input {
+  width: 100%;
   height: 30px;
   padding: 0 10px;
+  outline: none;
 }
-ul {
+.search-content {
+  width: 100%;
+  height: 200px;
   position: absolute;
   background: white;
-  z-index: 1;
-  padding: 10px;
+  overflow-y: scroll;
   display: grid;
   grid-template-columns: auto;
   gap: 10px;
-}
-li {
-  list-style: none;
-}
-.input-search {
-  position: relative;
+  z-index: 1;
+  padding: 10px;
 }
