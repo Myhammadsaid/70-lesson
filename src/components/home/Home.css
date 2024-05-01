@@ -1,0 +1,33 @@
+select {
+  width: 150px;
+  height: 30px;
+  outline: none;
+}
+form {
+  display: flex;
+  margin-bottom: 50px;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+form input {
+  width: 300px;
+  height: 30px;
+  padding: 0 10px;
+}
+ul {
+  position: absolute;
+  background: white;
+  z-index: 1;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 10px;
+}
+li {
+  list-style: none;
+}
+.input-search {
+  position: relative;
+}
